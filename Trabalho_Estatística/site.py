@@ -27,7 +27,7 @@ with open("Trabalho_1_Datasets/populacao_tempo.csv") as csvFile:
 
 	dpPop = sqrt(dpPop/(totPop-1))
 
-# Lendo os dados da amostra
+# Lendo a media da amostra
 with open("Trabalho_1_Datasets/amostra_tempo.csv") as csvFile:
 	csvFile.readline() #Retirando a primeira linha
 	for row in csvFile:
@@ -44,12 +44,6 @@ with open("Trabalho_1_Datasets/amostra_tempo.csv") as csvFile:
 
 	dpAms = sqrt(dpAms/(totAms-1))
 
-"""
-print "Media da populacao: " + str(popMean) + " \n"
-print "Desvio padrao da populacao: " + str(dpPop) + " \n"
-print "Media da amostra: " + str(amsMean) + " \n"
-print "Desvio padrao da amostra: " + str(dpAms) + " \n"
-"""
 
 #Teste da Hipotese usando alpha = 0.05
 z = (amsMean - popMean)/(dpPop - sqrt(dpAms))
