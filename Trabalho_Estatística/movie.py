@@ -23,26 +23,16 @@ for row in myRows:
 b = sqrt(b_x)*sqrt(b_y)
 r = a/b
 print '''A correlacao entre o numero de faces existentes no poster e \
-a nota no imdb e de {: .2f}%'''.format(abs(r)*100)
+a nota no imdb e de {: .8f}%'''.format(r)
 
-for i in range(10):
-	print myRows[i]
 
-data = [
-    ('a', 4),
-    ('b', 5),
-    ('c', 5),
-    ('d', 4),
-    ('e', 2),
-    ('f', 5),
-]
-labels, y = zip(*data)
+x = [i[0] for i in myRows]
+y = [i[1] for i in myRows]
 
-x = range(len(y))
 plt.plot(x, y, 'o')
-plt.xticks(x, labels)
+#plt.xticks(x, labels)
 plt.axis([-1, 8, 0, 6])
-#plt.show()
+plt.show()
 
 
 

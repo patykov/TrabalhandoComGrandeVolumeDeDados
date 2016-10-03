@@ -67,12 +67,15 @@ else:
 
 
 ###########################################################################################################
+print 'Media da populacao = {: .5f}'.format(popMean)
+print 'Media da amostra = {: .5f}'.format(amsMean)
+
+###########################################################################################################
 # Plotando os graficos
 
 h = sorted(popValues)  
 
 fit = stats.norm.pdf(h, np.mean(h), np.std(h))  #this is a fitting indeed
-plt.axis([-20, 20, 0, 0.30])
 plt.plot(h,fit)
 plt.show() 
 
