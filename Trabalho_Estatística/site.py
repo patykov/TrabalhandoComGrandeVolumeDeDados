@@ -1,6 +1,8 @@
 import csv
 import os
+import numpy as np
 import matplotlib.pyplot as plt
+import scipy.stats as stats
 from math import sqrt
 
 sumPopTime = 0.0
@@ -10,11 +12,14 @@ sumAmsTime = 0.0
 dpAms = 0.0
 totAms = 0
 
+popValues = []
 # Calculando a media da populacao
 with open("Trabalho_1_Datasets/populacao_tempo.csv") as csvFile:
 	csvFile.readline() #Retirando a primeira linha
 	for row in csvFile:
-		sumPopTime += float(row.split(";")[1])
+		time = float(row.split(";")[1])
+		popValues.append(time)
+		sumPopTime += time
 		totPop += 1
 
 	popMean = sumPopTime/totPop
@@ -59,6 +64,31 @@ if (z > 1.96):
 
 else:
 	print "A amostra nao apresentou mudancas significativas em relacao aos dados da populacao"
+
+
+###########################################################################################################
+# Plotando os graficos
+
+h = sorted(popValues)  
+
+fit = stats.norm.pdf(h, np.mean(h), np.std(h))  #this is a fitting indeed
+plt.axis([-20, 20, 0, 0.30])
+plt.plot(h,fit)
+plt.show() 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
