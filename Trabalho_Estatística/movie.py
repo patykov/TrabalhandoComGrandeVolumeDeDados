@@ -32,7 +32,7 @@ y = [i[0] for i in myRows]
 plt.plot(x, y, 'o')
 plt.xlabel("imdb_score")
 plt.ylabel("facenumber_in_poster")
-plt.axis([0, 10, 0, 50])
+plt.axis([0, 10, -1, 50])
 plt.show()
 
 

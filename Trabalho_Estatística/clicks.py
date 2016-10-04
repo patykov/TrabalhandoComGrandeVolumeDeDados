@@ -38,14 +38,13 @@ E_B_yes = ((A_yes+B_yes)*(B_yes+B_no))/T
 E_B_no = ((B_no+B_yes)*(A_no+B_no) )/T
 
 
-X = sqrt(( pow((A_yes-E_A_yes), 2)/E_A_yes) + (pow((A_no-E_A_no), 2)/E_A_no) + 
+X = (( pow((A_yes-E_A_yes), 2)/E_A_yes) + (pow((A_no-E_A_no), 2)/E_A_no) + 
 	(pow((B_yes-E_B_yes), 2)/E_B_yes) + (pow((B_no-E_B_no), 2)/E_B_no))
 
-# Para k = 4 com alpha = 0.05, temos Xc = 9,488
-Xc = 9.488
-if X < Xc: print "Pertencem a mesma populacao!!"
-else: print "Nao pertencem a mesma populacao"
-
+# Para k = 4 com alpha = 0.05, temos Xc = 3.841 
+Xc = 3.841
+if X < Xc: print 'Pertencem a mesma populacao pois encontra-se dentro do intervalo definido: {: .3f} < {: .3f}!!'.format(X,Xc)
+else: print 'Nao pertencem a mesma populacao pois ultrapassa o intervalo definido: {: .3f} >= {: .3f}'.format(X,Xc)
 
 # plot the distributions
 fig, ax = plt.subplots(figsize=(12, 6))
@@ -67,7 +66,6 @@ plt.title(r'$\chi^2\ \mathrm{Distribution}$')
 
 plt.legend()
 plt.show()
-
 
 
 
