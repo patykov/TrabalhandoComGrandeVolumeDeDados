@@ -25,13 +25,14 @@ r = a/b
 print '''A correlacao entre o numero de faces existentes no poster e \
 a nota no imdb e de {: .8f}%'''.format(r)
 
-
-x = [i[0] for i in myRows]
-y = [i[1] for i in myRows]
+# Plotando os dados
+x = [i[1] for i in myRows]
+y = [i[0] for i in myRows]
 
 plt.plot(x, y, 'o')
-#plt.xticks(x, labels)
-plt.axis([-1, 8, 0, 6])
+plt.xlabel("imdb_score")
+plt.ylabel("facenumber_in_poster")
+plt.axis([0, 10, 0, 50])
 plt.show()
 
 

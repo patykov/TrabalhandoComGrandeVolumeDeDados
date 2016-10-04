@@ -5,62 +5,45 @@ import matplotlib.pyplot as plt
 import scipy.stats as stats
 from math import sqrt
 
-sumPopTime = 0.0
-dpPop = 0.0
-totPop = 0
-sumAmsTime = 0.0
-dpAms = 0.0
-totAms = 0
 
 popValues = []
-# Calculando a media da populacao
+amsValues = []
+
+# Lendo dados da populacao
 with open("Trabalho_1_Datasets/populacao_tempo.csv") as csvFile:
 	csvFile.readline() #Retirando a primeira linha
 	for row in csvFile:
 		time = float(row.split(";")[1])
 		popValues.append(time)
-		sumPopTime += time
-		totPop += 1
 
-	popMean = sumPopTime/totPop
+popMean = sum(popValues)/len(popValues)
+dpPop = [pow((i - popMean), 2) for i in popValues]
+dpPop = sqrt(sum(dpPop)/len(popValues))
 
-# Calculando o desvio padrao da populacao
-with open("Trabalho_1_Datasets/populacao_tempo.csv") as csvFile:
-	csvFile.readline() #Retirando a primeira linha
-	for row in csvFile:
-		dpPop += pow((float(row.split(";")[1]) - popMean), 2)
 
-	dpPop = sqrt(dpPop/(totPop-1))
-
-# Lendo a media da amostra
+# Lendo dados da amostra
 with open("Trabalho_1_Datasets/amostra_tempo.csv") as csvFile:
 	csvFile.readline() #Retirando a primeira linha
 	for row in csvFile:
-		sumAmsTime += float(row.split(";")[1])
-		totAms += 1
+		time = float(row.split(";")[1])
+		amsValues.append(time)
 
-	amsMean = sumAmsTime/totAms
-
-# Calculando o desvio padrao da amostra
-with open("Trabalho_1_Datasets/amostra_tempo.csv") as csvFile:
-	csvFile.readline() #Retirando a primeira linha
-	for row in csvFile:
-		dpAms += pow((float(row.split(";")[1]) - amsMean), 2)
-
-	dpAms = sqrt(dpAms/(totAms-1))
+amsMean = sum(amsValues)/len(amsValues)
+dpAms = [pow((i - amsMean), 2) for i in amsValues]
+dpAms = sqrt(sum(dpAms)/len(amsValues))
 
 
 #Teste da Hipotese usando alpha = 0.05
 z = (amsMean - popMean)/(dpPop - sqrt(dpAms))
 if (z > 1.96):
 	# Nao faz parte da distribuicao normal da populacao - Hipotese rejeitada
-	custo = 0.005*totAms
-	lucro = 5*(amsMean - popMean)
+	custo = 0.005*len(amsValues)
+	lucro = 0.05*(amsMean - popMean)
 
 	if(lucro>custo):
-		print 'A nova feature deve ser mantida pois gera {} centavos de lucro!'.format(lucro-custo)
+		print 'A nova feature deve ser mantida pois gera {: .5f} centavos de lucro!'.format(lucro-custo)
 	else:
-		print 'A nova feature nao deve ser mantida pois gera {} centavos de prejuizo'.format(custo-lucro)
+		print 'A nova feature nao deve ser mantida pois gera {: .5f} centavos de prejuizo'.format(custo-lucro)
 
 else:
 	print "A amostra nao apresentou mudancas significativas em relacao aos dados da populacao"
@@ -73,11 +56,11 @@ print 'Media da amostra = {: .5f}'.format(amsMean)
 ###########################################################################################################
 # Plotando os graficos
 
-h = sorted(popValues)  
+# h = sorted(popValues)  
 
-fit = stats.norm.pdf(h, np.mean(h), np.std(h))  #this is a fitting indeed
-plt.plot(h,fit)
-plt.show() 
+# fit = stats.norm.pdf(h, np.mean(h), np.std(h))  #this is a fitting indeed
+# plt.plot(h,fit)
+#plt.show() 
 
 
 
