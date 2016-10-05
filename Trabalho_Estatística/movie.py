@@ -23,7 +23,7 @@ for row in myRows:
 b = sqrt(b_x)*sqrt(b_y)
 r = a/b
 print '''A correlacao entre o numero de faces existentes no poster e \
-a nota no imdb e de {: .8f}%'''.format(r)
+a nota no imdb e de {: .8f}'''.format(r)
 
 # Plotando os dados
 x = [i[1] for i in myRows]
